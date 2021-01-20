@@ -1,0 +1,32 @@
+void loop() { 
+   aState = digitalRead(outputA); // Reads the "current" state of the outputA
+   // If the previous and the current state of the outputA are different, that means a Pulse has occured
+   if (aState != aLastState){   
+      
+     // If the outputB state is different to the outputA state, that means the encoder is rotating clockwise
+     if (digitalRead(outputB) != aState) { 
+       counter ++;
+     } else {
+       counter --;
+     }
+     display.clearDisplay();
+     display.setCursor(0,0);
+     if (bDebug) {
+      Serial.print("Position: ");
+      Serial.println(counter);
+     }
+
+     if (!bDebug) { 
+      if (counter >= 0)
+        Serial.println(counter / steps);
+      else {
+        Serial.print("-");
+        Serial.println(abs(counter) / steps);
+
+       }
+     }
+     display.display();
+   }    
+   aLastState = aState; // Updates the previous state of the outputA with the current state
+ }
+ 
