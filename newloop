@@ -8,9 +8,7 @@ void loop() {
        counter ++;
      } else {
        counter --;
-     }
-     display.clearDisplay();
-     display.setCursor(0,0);
+     }     
      if (bDebug) {
       Serial.print("Position: ");
       Serial.println(counter);
@@ -24,9 +22,13 @@ void loop() {
         Serial.println(abs(counter) / steps);
 
        }
-     }
-     display.display();
+     }     
    }    
    aLastState = aState; // Updates the previous state of the outputA with the current state
+   
+  display.display();
+  yield();
+  display.clearDisplay();
+  display.setCursor(0,0);
  }
  
